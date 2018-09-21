@@ -7,5 +7,5 @@ software-as-a-service (SaaS) enables online stores to easily create, maintain an
 apps and mobile websites for the iPhone, iPad, Android smartphones and tablets.
 
 ## License
-Shopgate Connect - cart extension is available under the Apache License, Version 2.0.
+Shopgate Connect - PWA Benchmark runner is available under the Apache License, Version 2.0.
 See the [LICENSE](./LICENSE) file for more information.
