@@ -1,0 +1,18 @@
+cache:
+  npm: true
+  directories:
+    - node_modules
+language: node_js
+node_js:
+  - "10"
+install:
+  - npm install
+script: 
+  - ./runner.sh
+#after_success:
+#  - curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST -d "{\"body\": \"${node ../report branch_a branch_a}\"}" "https://api.github.com/repos/${SOURCE_TRAVIS_REPO_SLUG}/issues/${SOURCE_TRAVIS_PULL_REQUEST}/comments"
+branches:
+  only:
+  - master 
+notifications:
+  email: false
