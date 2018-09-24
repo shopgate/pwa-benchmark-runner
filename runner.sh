@@ -6,6 +6,7 @@ BRANCH_B="develop"
 
 # Install dependencies.
 npm i -g @shopgate/platform-sdk
+npm i -g lerna
 
 # Clone pwa and install submodules.
 git clone https://github.com/shopgate/pwa.git
@@ -22,8 +23,9 @@ echo '{"ip": "127.0.0.1", "port": 8080, "hmrPort": 3000, "apiPort": 9667, "remot
 echo '{"id": "shop_30188", "benchmark": true }' > .sgcloud/app.json 
 
 # Start services.
+sgconnect login --username $PLATFORM_USER --password $PLATFORM_PASSWORD
 sgconnect extension attach
-sgconnect backend start | sed "s/^/[BACKEND] /" &
+#sgconnect backend start | sed "s/^/[BACKEND] /" &
 sgconnect frontend start --theme=gmd | sed "s/^/[FRONTEND] /" &
 
 google-chrome-stable --headless --remote-debugging-port=9223 | sed "s/^/[CHROME] /" &
