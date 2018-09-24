@@ -16,3 +16,6 @@ branches:
   - master 
 notifications:
   email: false
+sudo: required
+addons:
+  chrome: stable

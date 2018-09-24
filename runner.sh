@@ -25,7 +25,8 @@ echo '{"id": "shop_30188", "benchmark": true }' > .sgcloud/app.json
 sgconnect extension attach
 sgconnect backend start | sed "s/^/[BACKEND] /" &
 sgconnect frontend start --theme=gmd | sed "s/^/[FRONTEND] /" &
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9223 | sed "s/^/[CHROME] /" &
+
+google-chrome-stable --headless --remote-debugging-port=9223 | sed "s/^/[CHROME] /" &
 
 # Launch advanced runner in js.
 sleep 30 # wait a bit for frontend and backend processes.
