@@ -1,0 +1,21 @@
+{
+  "name": "@shopgate/pwa-benchmark-runner",
+  "version": "0.1.0",
+  "description": "A benchmark runner for travis ci",
+  "main": "runner.sh",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shopgate",
+    "pwa",
+    "benchmark",
+    "react",
+    "redux"
+  ],
+  "author": "Shopgate GmbH",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "chrome-remote-interface": "^0.26.1"
+  }
+}
