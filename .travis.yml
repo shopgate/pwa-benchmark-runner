@@ -1,21 +1,24 @@
 cache:
   npm: true
   directories:
-    - node_modules
+  - node_modules
 language: node_js
 node_js:
-  - "10"
+- '10'
 install:
-  - npm install
-script: 
-  - ./runner.sh
-#after_success:
-#  - curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST -d "{\"body\": \"${node ../report branch_a branch_a}\"}" "https://api.github.com/repos/${SOURCE_TRAVIS_REPO_SLUG}/issues/${SOURCE_TRAVIS_PULL_REQUEST}/comments"
+- npm install
+script:
+- "./runner.sh"
 branches:
   only:
-  - master 
+  - master
 notifications:
   email: false
 sudo: required
 addons:
   chrome: stable
+env:
+  global:
+  - secure: A5Y+OgFhG9zHE6k1fsZjuGhJN9UysOQDkNCbRonrknPV28DQnLbfVvACBudv9054UZESJ2rPDoPc2MH1w3/k3PSHQQH2UfgnfeYuXPuU1U5QFNVDnV/ObjFpTmUmaWpQD9JciUy2SaOVzGhqTPeFrigF65KTUBzTejSe8eLm4ryRO+i4xQJsvVOFYmoPd+bUFNLHPZoSbnVLxMYPZvnVVir7qjsqLdZgxKq2ZP6YoFvUWrzKKo9fwhMjTuDLtTyFAolDV4SDu1yQ76Pt4VNYrigPAvrhxU+jEU385s8pO9P4PhEiESVVkspEJXAyWvmBkgoFSa9cSVY12ZfEnSLZaZqsxWX2n646ZB2KQncZx2LQ10o/JZQilf3IOGutiyv2AqT0Ev9KNpbZ8k2qCDJPzeHLIc7XMAg451vG+9aHiFufT+2ce0CTg8e3tZrwo7t3bE2PuxAPtzUT9P3+Gr6Whf/dmE7Ze/13mt4DXn7LXHGSpW8VcxtsdI+4hOwK3qrl59VgA5fDfq6rYuoRfiFThjdwcpCAdl0yyQQCmBE+WaZ57dL4/0qL42j2YEwY8dKIu6q/+2T9Y9ipvlJ3ZcE2Tx8xOo0i6SltqxP93GtoS+1t+VUfkkLpYzBctT/p23q9dNSk5RmcQjGfJcAi8rJmyoM7ClKVqjMBcUW3cnyFDS4=
+  - secure: MiRMOWYkw/Rw89qB/0zn7XbFyKc7TfFHsWsicOmrSIHwhdN0IKAK7/t3dHR//rkOuDoSVkmVgdqudpAn6W5x+zXApZZMxVPihVpuYYZV9wDv9d8VORV7Aqo3jSq5zNuR1EvX0+Rp4fx4GUoZcQstul+pj5Ck2sRreUENZ3a3tzaxv2VvUpOYmepFqysubQSLUp2pVqt1d2fJv+T/bUVriybA8o1opo8l0O5PUhkQW83RtQHLiK2ltGEaB7kPVVfPWU3YIqXWyrfuRI46it7aI6tgpI7qS0C8lcaS/piwwH0K3kx+ojXiHBJiqQuorExR30zMVYwjb0jELj8hsdQRPDgqtMMsfnDvQE65OnwUwa0NiKaNUwPhdibaL/6up6zc/JMQ0r9kBhpqc+3xRZuIywN1pkhRbMi0pukpuch88e4/A9D1QPIuSHG9BZR2PYsNSOiKqagXlNDdUA2H/9YHsF1sReoPAsC4Q6OjnFT4+t3VNrmc1MDP6PfsAr4ITrCzBh+ONys1KxreR74//cWHnpgT/OAQOWIu/MrxVRpi7joOu9dBYoRslgn5xjRNEo7/+WHfo28x1nFeMqzMCnpdL3WGfFC7eXFnNZOBvWwsUaKCe9RtST5D46I3Ge8Pfy8hDHLwJqkjO7Ifc5JBW991yfTzNxT7ef6wrc/IwKp7mNM=
+  - secure: Fok6SsxPo0F2UcaQeksmHmOTcHQ8vxk+pxBKj1Vz8rdyklX6f+jVXlvHWDLbKgJHjiHl2ODtNltQveAZ2ZqDNzhvJOs37v4nmw6YBlPBR+nm78nr7DCiHws+IzJ9s0z8ObonGwEEQe7vSb8nBJSgigPWz7Yf1tTeLnAIW0Bi8o7veAQQBDSOnktZkPMbycpfBjFTnyPgyh4z8B+oWvxp75dCVl8LQG16XzaqtDtejregps1aCe7+/jjAGaswVuOzR3OSwvr6g36IT5Pz1T5ZxWPz5nnA+7VDG3VUSuEZormEDtdeQ3WJM0LfqqDMtZpQunN1i5/IIC0kM2OD/f9lVc2X0mGKRTCXz+JbVepiiUO/n0QhcJ/FvYr3wdvsdUai54jPp6/GQorczAs3Rqdx4p/miP6dfY1l+/WEEyAQew1Sc1hRbZ0siN+pwmsj+sPunKgRKr+Qor853ZDNhkzdJClNo+0ARamrKdx/P2TZbwOlW7DlrUxIQ2m7FofJJ1K5+CBQY+FlfzOGLmut7URnidG+T00TmHu6Q6NOJGx7BZoZ1xekPj04v4k7yfZINsoo4PbbhmHLGVbQKy4MlJHF/5L84mQULpvCwTajdv866Gtx6WhmGRQ4wSMxGVNiAmDM6odQumf9ghFqJRtkPTC+6x5Q1XW7op0nivKgaxuAw/4=
