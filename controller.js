@@ -1,7 +1,7 @@
 const fs = require('fs')
 const cdp = require('chrome-remote-interface');
 
-const repeatCount = 3
+const repeatCount = 5
 const pages = [
   ['Homepage', '/'],
   ['Product with Variants', '/item/393132']
@@ -58,7 +58,7 @@ const executePage = async (client, pageTitle, pageUrl) => {
       const evaluation = await Runtime.evaluate({ expression: 'JSON.stringify(window.benchmark.keyFigures)' })
       const benchmark = JSON.parse(evaluation.result.value)
       resolve(buildStats(benchmark))
-    }, 15000)
+    }, 20000)
   )
 }
 
