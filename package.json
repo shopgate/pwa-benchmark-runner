@@ -16,6 +16,7 @@
   "author": "Shopgate GmbH",
   "license": "Apache-2.0",
   "dependencies": {
-    "chrome-remote-interface": "^0.26.1"
+    "chrome-remote-interface": "^0.26.1",
+    "markdown-table": "^1.1.2"
   }
 }

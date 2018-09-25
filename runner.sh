@@ -38,3 +38,14 @@ node ../controller branch_a | sed "s/^/[CONTROLLER] /"
 # Generate PR comment
 PR_REPLY="$(node ../report branch_a branch_a)"
 echo "$PR_REPLY"
+
+if [[ -z "${TRIGGER_PULL_REQUEST}" ]]; then
+  echo "Dry Run no PR given."
+else
+  echo "Posting to GitHub PR"
+  curl \
+    -H "Authorization: token ${GITHUB_TOKEN}" \
+    -X POST \
+    -d "{\"body\": \"$PR_REPLY\"}" \
+    "https://api.github.com/repos/${TRIGGER_REPO_SLUG}/issues/${TRIGGER_PULL_REQUEST}/comments"
+fi

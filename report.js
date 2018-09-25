@@ -1,3 +1,4 @@
+const table = require('markdown-table')
 const before = require(`./pwa/${process.argv[2]}.json`)
 const after = require(`./pwa/${process.argv[3]}.json`)
 
@@ -27,7 +28,7 @@ const formatSummary = (options) => {
 
 const message = `
 # Benchmark Report  🚨
->  \`${process.env.SOURCE_BRANCH}\` against \`${process.env.TARGET_BRANCH}\` 
+>  \`${process.env.BRANCH_A}\` against \`${process.env.BRANCH_B}\` 
 
 ## Summary
 ${summaryOptions.map(options => `${formatSummary(options)}\n`).join('')}
@@ -36,7 +37,12 @@ ${summaryOptions.map(options => `${formatSummary(options)}\n`).join('')}
 <details><summary>Click to read detailed report.</summary>
 <p>
 
-TODO sorry, but thanks for checking
+${Object.keys(before).map(pageName => table([
+  ['Type', 'Before', 'After'],
+  ...Object.keys(before[pageName]).map(valueType => ([
+    valueType, before[pageName][valueType], after[pageName][valueType]
+  ]))
+], { align: ['l', 'r', 'r'] })).join('\n\n')}
 `;
 
 console.log(message)
