@@ -45,7 +45,9 @@ const executePage = async (client, pageTitle, pageUrl) => {
   console.log(`Benchmarking ${pageTitle} ...`)
 
   // Opening page.
-  await Page.navigate({url: `http://127.0.0.1:8080${pageUrl}`});
+  await Page.navigate({ url: 'about:blank' })
+  await Page.loadEventFired();
+  await Page.navigate({url: `http://127.0.0.1:8080${pageUrl}`})
   await Page.loadEventFired();
 
   // Wait until actions are done.
