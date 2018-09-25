@@ -48,7 +48,7 @@ else
   curl \
     -H "Authorization: token ${GITHUB_TOKEN}" \
     -X POST \
-    -d "{\"body\": \"$PR_REPLY\"}" \
+    -d "$PR_REPLY" \
     "$API_ENDPOINT"
 fi
 

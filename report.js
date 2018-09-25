@@ -45,4 +45,4 @@ ${Object.keys(before).map(pageName => table([
 ], { align: ['l', 'r', 'r'] })).join('\n\n')}
 `;
 
-console.log(message)
+console.log(JSON.stringify({ body: message }))
