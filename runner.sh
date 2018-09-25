@@ -36,5 +36,5 @@ sleep 30 # wait a bit for frontend and backend processes.
 node ../controller branch_a | sed "s/^/[CONTROLLER] /"
 
 # Generate PR comment
-PR_REPLY=${node ../report branch_a branch_a}
-echo $PR_REPLY
+PR_REPLY="$(node ../report branch_a branch_a)"
+echo "$PR_REPLY"
