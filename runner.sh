@@ -39,10 +39,10 @@ node ../controller branch_a | sed "s/^/[CONTROLLER] /"
 PR_REPLY="$(node ../report branch_a branch_a)"
 echo "$PR_REPLY"
 
-if [[ -z "${TRIGGER_PULL_REQUEST}" ]]; then
+if [[ -z "$TRIGGER_PULL_REQUEST" ]]; then
   echo "Dry Run no PR given."
 else
-  $API_ENDPOINT="https://api.github.com/repos/${TRIGGER_REPO_SLUG}/issues/${TRIGGER_PULL_REQUEST}/comments"
+  $API_ENDPOINT="https://api.github.com/repos/$TRIGGER_REPO_SLUG/issues/$TRIGGER_PULL_REQUEST/comments"
   echo "Posting to GitHub PR -> $API_ENDPOINT"
 
   curl \
