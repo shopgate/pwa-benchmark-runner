@@ -1,6 +1,7 @@
 const fs = require('fs')
 const cdp = require('chrome-remote-interface');
 
+const repeatCount = 3
 const pages = [
   ['Homepage', '/'],
   ['Product with Variants', '/item/393132']
@@ -70,8 +71,21 @@ const run = async () => {
   // Benchmark each page.
   const results = {};
   for (let [pageTitle, pageUrl] of pages) {
-    const stats = await executePage(client, pageTitle, pageUrl)
-    results[pageTitle] = stats
+    const statsOverall = []
+    for (let i = 0; i < repeatCount; i++) {
+      statsOverall.push(await executePage(client, pageTitle, pageUrl))
+    }
+
+    // Calculate sum
+    const sum = statsOverall.reduce((acc, current) => ({
+      sumRenders: acc.sumRenders + current.sumRenders,
+      sumRenderTime: acc.sumRenderTime + current.sumRenderTime,
+      avgRenderTime: acc.avgRenderTime + current.avgRenderTime,
+    }), { sumRenders: 0, sumRenderTime: 0, avgRenderTime: 0 })
+
+    // Calculate average out of all tries.
+    Object.keys(sum).forEach(key => { sum[key] /= statsOverall.length })
+    results[pageTitle] = sum
   }
 
   // Output.
