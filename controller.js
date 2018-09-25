@@ -58,17 +58,20 @@ const executePage = async (client, pageTitle, pageUrl) => {
       const evaluation = await Runtime.evaluate({ expression: 'JSON.stringify(window.benchmark.keyFigures)' })
       const benchmark = JSON.parse(evaluation.result.value)
       resolve(buildStats(benchmark))
-    }, 20000)
+    }, 25000)
   )
 }
 
 const run = async () => {
   const client = await cdp({ port: 9223 })
-  const { Page, Runtime } = client
+  const { Page, Runtime, Emulation } = client
+
+  // We slow down cpu to make sure we get better results even when travis is slower sometimes.
+  Emulation.setCPUThrottlingRate({ rate: 3 })
 
   // Enable debugging.
-  await Page.enable();
-  await Runtime.enable();
+  await Page.enable()
+  await Runtime.enable()
 
   // Benchmark each page.
   const results = {};
