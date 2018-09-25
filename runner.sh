@@ -42,10 +42,14 @@ echo "$PR_REPLY"
 if [[ -z "${TRIGGER_PULL_REQUEST}" ]]; then
   echo "Dry Run no PR given."
 else
-  echo "Posting to GitHub PR"
+  $API_ENDPOINT="https://api.github.com/repos/${TRIGGER_REPO_SLUG}/issues/${TRIGGER_PULL_REQUEST}/comments"
+  echo "Posting to GitHub PR -> $API_ENDPOINT"
+
   curl \
     -H "Authorization: token ${GITHUB_TOKEN}" \
     -X POST \
     -d "{\"body\": \"$PR_REPLY\"}" \
-    "https://api.github.com/repos/${TRIGGER_REPO_SLUG}/issues/${TRIGGER_PULL_REQUEST}/comments"
+    "$API_ENDPOINT"
 fi
+
+sgconnect logout 
