@@ -12,7 +12,7 @@ npm i -g lerna
 git clone https://github.com/shopgate/pwa.git
 cd pwa
 git checkout $BRANCH_A
-perl -i -p -e 's|git@([a-zA-Z\.]*):([a-zA-Z-\/]*)|https://\1\/\2|g' .gitmodules1
+perl -i -p -e 's|git@([a-zA-Z\.]*):([a-zA-Z-\/]*)|https://\1\/\2|g' .gitmodules
 git submodule init
 git submodule update
 make clean
