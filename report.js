@@ -34,15 +34,17 @@ const message = `
 ${summaryOptions.map(options => `${formatSummary(options)}\n`).join('')}
 
 ## Details
-<details><summary>Click to read detailed report.</summary>
+<details><summary>Click to read a more detailed report.</summary>
 <p>
 
-${Object.keys(before).map(pageName => table([
-  ['Type', 'Before', 'After'],
-  ...Object.keys(before[pageName]).map(valueType => ([
-    valueType, before[pageName][valueType], after[pageName][valueType]
-  ]))
-], { align: ['l', 'r', 'r'] })).join('\n\n')}
+${Object.keys(before).map(pageName => `
+  #### ${pageName}
+  ${table([
+    ['Type', 'Before', 'After'],
+    ...Object.keys(before[pageName]).map(valueType => ([
+      valueType, before[pageName][valueType], after[pageName][valueType]
+    ]))
+  ], { align: ['l', 'r', 'r'] })}`).join('\n\n')}
 `;
 
 console.log(JSON.stringify({ body: message }))
