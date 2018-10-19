@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -z "$TRIGGER_BRANCH_TARGET" ]; then
+  echo "Dry run, no branch name given."
+  exit
+fi
+
 # Configuration.
 BRANCH_A="$TRIGGER_BRANCH_TARGET"
 BRANCH_B="$TRIGGER_BRANCH_DESTINATION"
