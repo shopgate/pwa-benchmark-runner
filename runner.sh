@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Configuration.
-BRANCH_A="PWA-benchmark"
-BRANCH_B="develop"
+BRANCH_A="$TRIGGER_BRANCH_TARGET"
+BRANCH_B="$TRIGGER_BRANCH_DESTINATION"
 
 # Install dependencies.
 npm i -g @shopgate/platform-sdk
@@ -12,9 +12,9 @@ npm i -g lerna
 git clone https://github.com/shopgate/pwa.git
 cd pwa
 git checkout $BRANCH_A
-perl -i -p -e 's|git@([a-zA-Z\.]*):([a-zA-Z-\/]*)|https://\1\/\2|g' .gitmodules
-git submodule init
-git submodule update
+#perl -i -p -e 's|git@([a-zA-Z\.]*):([a-zA-Z-\/]*)|https://\1\/\2|g' .gitmodules
+#git submodule init
+#git submodule update
 make clean
 
 # Prepare platfor sdk
@@ -35,8 +35,16 @@ google-chrome-stable --headless --remote-debugging-port=9223 | sed "s/^/[CHROME]
 sleep 30 # wait a bit for frontend and backend processes.
 node ../controller branch_a | sed "s/^/[CONTROLLER] /"
 
+# Prepare second run
+git checkout $BRANCH_B
+make clean
+
+# Wait for webpack and execute second run
+sleep 30
+node ../controller branch_b | sed "s/^/[CONTROLLER] /"
+
 # Generate PR comment
-PR_REPLY="$(node ../report branch_a branch_a)"
+PR_REPLY="$(BRANCH_A=$BRANCH_A BRANCH_B=$BRANCH_B node ../report branch_a branch_b)"
 echo "$PR_REPLY"
 
 if [ -z "$TRIGGER_PULL_REQUEST" ]; then

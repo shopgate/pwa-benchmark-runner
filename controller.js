@@ -3,8 +3,9 @@ const cdp = require('chrome-remote-interface');
 
 const repeatCount = 5
 const pages = [
-  ['Homepage', '/'],
-  ['Product with Variants', '/item/393132']
+  // ['Homepage', '/'],  SKIPPED: Currently the start page is very unstable.
+  ['Product with Variants', '/item/393132'],
+  ['All products category', '/category/3733'],
 ] 
 
 const buildStats = (benchmark) => {
@@ -55,8 +56,11 @@ const executePage = async (client, pageTitle, pageUrl) => {
     setTimeout(async () => {
       // Evaluate benchmark result.
       await Runtime.evaluate({ expression: 'window.benchmark.print()' })
+
+      // Transfer result from chrome to node process.
       const evaluation = await Runtime.evaluate({ expression: 'JSON.stringify(window.benchmark.keyFigures)' })
       const benchmark = JSON.parse(evaluation.result.value)
+
       resolve(buildStats(benchmark))
     }, 15000)
   )
@@ -64,7 +68,7 @@ const executePage = async (client, pageTitle, pageUrl) => {
 
 const run = async () => {
   const client = await cdp({ port: 9223 })
-  const { Page, Runtime, Emulation } = client
+  const { Page, Runtime } = client
 
   // Enable debugging.
   await Page.enable()
